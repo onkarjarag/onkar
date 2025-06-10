@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA Gallery | Contemporary Art Space</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light-bg: #f8f8f8;
+            --light-accent: #f0f0f0;
+            --medium-grey: #e0e0e0;
+            --dark-grey: #333333;
+            --text-dark: #222222;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --accent: #c0a080; /* Subtle gold accent */
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: rgba(248, 248, 248, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--medium-grey);
+            transition: var(--transition);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            font-weight: 400;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--text-dark);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 25px;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            display: inline-block;
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+            background: transparent;
+        }
+        
+        .btn:hover {
+            background: var(--text-dark);
+            color: var(--light-bg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+            background: var(--light-accent);
+        }
+        
+        .hero-content {
+            max-width: 650px;
+            z-index: 2;
+            padding: 40px 0;
+        }
+        
+        .hero h1 {
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+        
+        .hero h1 strong {
+            font-weight: 600;
+            display: block;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: var(--text-medium);
+            max-width: 500px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 80%;
+            background: url('https://images.unsplash.com/photo-1563014959-7aaa83350992?ixlib=rb-4.0.3') center/cover;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            border: 15px solid var(--light-bg);
+        }
+        
+        /* Gallery Section */
+        .section {
+            padding: 120px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: var(--text-dark);
+        }
+        
+        .section-title p {
+            max-width: 600px;
+            margin: 25px auto 0;
+            color: var(--text-medium);
+        }
+        
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--text-dark);
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--text-dark);
+            color: var(--light-bg);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .art-card {
+            background: var(--light-bg);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .art-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .art-img {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .art-card:hover .art-img {
+            transform: scale(1.03);
+        }
+        
+        .art-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.02);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 25px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .art-card:hover .art-overlay {
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .view-btn {
+            background: var(--light-bg);
+            color: var(--text-dark);
+            border: 1px solid var(--text-dark);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+        
+        .view-btn:hover {
+            background: var(--text-dark);
+            color: var(--light-bg);
+        }
+        
+        .art-info {
+            padding: 25px;
+            background: var(--light-bg);
+        }
+        
+        .art-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .art-info p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        
+        .price {
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Artists Section */
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .artist-card {
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .artist-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .artist-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-size: cover;
+            margin: 0 auto 25px;
+            border: 1px solid var(--medium-grey);
+            transition: var(--transition);
+        }
+        
+        .artist-card:hover .artist-avatar {
+            border-color: var(--text-dark);
+        }
+        
+        .artist-name {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .artist-specialty {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?ixlib=rb-4.0.3') center/cover;
+            text-align: center;
+            padding: 100px 0;
+            margin: 100px 0;
+            position: relative;
+        }
+        
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid var(--text-dark);
+            pointer-events: none;
+        }
+        
+        .cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+        }
+        
+        /* Collections */
+        .collections {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 70px;
+        }
+        
+        .collection-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+        
+        .collection-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+        
+        .collection-card:hover .collection-img {
+            transform: scale(1.05);
+        }
+        
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+        
+        .collection-card:hover .collection-overlay {
+            transform: translateY(0);
+        }
+        
+        .collection-overlay h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--light-accent);
+            padding: 100px 0 50px;
+            border-top: 1px solid var(--medium-grey);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+        
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: var(--text-dark);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-dark);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--text-dark);
+            transition: var(--transition);
+            border: 1px solid var(--text-dark);
+        }
+        
+        .social-links a:hover {
+            background: var(--text-dark);
+            color: var(--light-bg);
+        }
+        
+        .newsletter input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--medium-grey);
+            background: transparent;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid var(--medium-grey);
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .collections {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-image {
+                display: none;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+            
+            .hero p {
+                margin: 0 auto 40px;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .collections {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">AURA<span>Gallery</span></a>
+            <ul class="nav-links">
+                <li><a href="#">Exhibitions</a></li>
+                <li><a href="#">Artists</a></li>
+                <li><a href="#">Collections</a></li>
+                <li><a href="#">Art Fairs</a></li>
+                <li><a href="#">Journal</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <div class="user-actions">
+                <a href="#" class="btn">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Contemporary Art<br><strong>Curated with Vision</strong></h1>
+                <p>AURA Gallery presents exceptional contemporary art in a space designed to inspire dialogue and discovery.</p>
+                <div class="hero-btns">
+                    <a href="#" class="btn">Current Exhibition</a>
+                    <a href="#" class="btn">View Artists</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </section>
+
+    <!-- Current Exhibition -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Current Exhibition</h2>
+                <p>Transcending Boundaries: A Survey of Contemporary Practices</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="art-card">
+                    <div class="art-img" style="background: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3') center/cover;">
+                        <div class="art-overlay">
+                            <button class="view-btn">View Details</button>
+                        </div>
+                    </div>
+                    <div class="art-info">
+                        <h3>Ethereal Forms</h3>
+                        <p>Maya Johnson, 2023</p>
+                        <p>Mixed media on canvas</p>
+                        <p class="price">$8,500</p>
+                    </div>
+                </div>
+                
+                <div class="art-card">
+                    <div class="art-img" style="background: url('https://images.unsplash.com/photo-1543857778-c4a1a569e7bd?ixlib=rb-4.0.3') center/cover;">
+                        <div class="art-overlay">
+                            <button class="view-btn">View Details</button>
+                        </div>
+                    </div>
+                    <div class="art-info">
+                        <h3>Urban Rhythms</h3>
+                        <p>David Chen, 2023</p>
+                        <p>Oil on canvas</p>
+                        <p class="price">$12,000</p>
+                    </div>
+                </div>
+                
+                <div class="art-card">
+                    <div class="art-img" style="background: url('https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3') center/cover;">
+                        <div class="art-overlay">
+                            <button class="view-btn">View Details</button>
+                        </div>
+                    </div>
+                    <div class="art-info">
+                        <h3>Silent Conversations</h3>
+                        <p>Sophie Laurent, 2023</p>
+                        <p>Acrylic and ink</p>
+                        <p class="price">$7,200</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Artists -->
+    <section class="section" style="background: var(--light-accent);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Artists</h2>
+                <p>Discover the visionary creators shaping contemporary art</p>
+            </div>
+            
+            <div class="artists-grid">
+                <div class="artist-card">
+                    <div class="artist-avatar" style="background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3') center/cover;"></div>
+                    <h3 class="artist-name">Marcus Chen</h3>
+                    <p class="artist-specialty">Abstract Expressionism</p>
+                    <a href="#" class="btn">View Portfolio</a>
+                </div>
+                
+                <div class="artist-card">
+                    <div class="artist-avatar" style="background: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3') center/cover;"></div>
+                    <h3 class="artist-name">Elena Rodriguez</h3>
+                    <p class="artist-specialty">Sculpture & Installation</p>
+                    <a href="#" class="btn">View Portfolio</a>
+                </div>
+                
+                <div class="artist-card">
+                    <div class="artist-avatar" style="background: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3') center/cover;"></div>
+                    <h3 class="artist-name">Thomas Dubois</h3>
+                    <p class="artist-specialty">Photography</p>
+                    <a href="#" class="btn">View Portfolio</a>
+                </div>
+                
+                <div class="artist-card">
+                    <div class="artist-avatar" style="background: url('https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3') center/cover;"></div>
+                    <h3 class="artist-name">Alex Morgan</h3>
+                    <p class="artist-specialty">Mixed Media</p>
+                    <a href="#" class="btn">View Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Curated Collections</h2>
+                <p>Thematically organized selections from our artists</p>
+            </div>
+            
+            <div class="collections">
+                <div class="collection-card">
+                    <div class="collection-img" style="background: url('https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?ixlib=rb-4.0.3') center/cover;"></div>
+                    <div class="collection-overlay">
+                        <h3>Urban Perspectives</h3>
+                        <p>Exploring the modern cityscape through diverse mediums</p>
+                        <a href="#" class="btn" style="margin-top: 15px;">View Collection</a>
+                    </div>
+                </div>
+                
+                <div class="collection-card">
+                    <div class="collection-img" style="background: url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?ixlib=rb-4.0.3') center/cover;"></div>
+                    <div class="collection-overlay">
+                        <h3>Natural Elements</h3>
+                        <p>Art inspired by the forms and forces of nature</p>
+                        <a href="#" class="btn" style="margin-top: 15px;">View Collection</a>
+                    </div>
+                </div>
+                
+                <div class="collection-card">
+                    <div class="collection-img" style="background: url('https://images.unsplash.com/photo-1578926375605-eaf7559b1458?ixlib=rb-4.0.3') center/cover;"></div>
+                    <div class="collection-overlay">
+                        <h3>Abstract Visions</h3>
+                        <p>Pushing the boundaries of form and color</p>
+                        <a href="#" class="btn" style="margin-top: 15px;">View Collection</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="cta">
+                <h2>Visit Our Gallery</h2>
+                <p>Experience our current exhibition in person. We're located in the heart of the arts district.</p>
+                <div class="hero-btns" style="justify-content: center;">
+                    <a href="#" class="btn">View Location</a>
+                    <a href="#" class="btn">Schedule Visit</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo">AURA<span>Gallery</span></a>
+                    <p style="margin: 20px 0; color: var(--text-medium);">Presenting exceptional contemporary art in a space designed to inspire.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Gallery</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Current Exhibition</a></li>
+                        <li><a href="#">Upcoming Shows</a></li>
+                        <li><a href="#">Past Exhibitions</a></li>
+                        <li><a href="#">Art Fairs</a></li>
+                        <li><a href="#">Gallery Hours</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Artists</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Represented Artists</a></li>
+                        <li><a href="#">Artist Portfolios</a></li>
+                        <li><a href="#">Artist Opportunities</a></li>
+                        <li><a href="#">Studio Visits</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">info@auragallery.com</a></li>
+                        <li><a href="#">+1 (212) 555-2023</a></li>
+                        <li><a href="#">456 Arts Boulevard, New York</a></li>
+                    </ul>
+                    <div class="newsletter">
+                        <h3 style="margin-top: 25px;">Newsletter</h3>
+                        <input type="email" placeholder="Your email address">
+                        <a href="#" class="btn">Subscribe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 AURA Gallery. All rights reserved. | Designed with a focus on art and experience</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.padding = '15px 0';
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
+                } else {
+                    header.style.padding = '20px 0';
+                    header.style.boxShadow = 'none';
+                }
+            });
+            
+            // Filter buttons
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Collection card hover effect
+            const collectionCards = document.querySelectorAll('.collection-card');
+            collectionCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.querySelector('.collection-overlay').style.transform = 'translateY(0)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.querySelector('.collection-overlay').style.transform = 'translateY(100%)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
